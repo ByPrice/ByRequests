@@ -8,8 +8,30 @@ from lxml import html
 import time
 import eventlet
 from eventlet.timeout import Timeout
+import os
+import tempfile
+import sys
+from os.path import pardir, sep
+import shutil
 
-ua = UserAgent()
+sys.path.append(pardir + sep + ".")
+
+
+DB = os.path.join(
+    tempfile.gettempdir(),
+    'fake_useragent_0.1.11.json'
+    )
+
+
+if not os.path.isfile(DB):
+    shutil.copy(os.path.realpath('ByRequests/useragents.json'),DB)
+else:
+    if os.stat(DB).st_size==0:
+        shutil.copy(os.path.realpath('ByRequests/useragents.json'),DB)
+
+
+ua = UserAgent(cache=True)
+
 
 
 class ByRequest():
