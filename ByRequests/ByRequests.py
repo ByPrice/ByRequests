@@ -23,11 +23,16 @@ DB = os.path.join(
     )
 
 
+this_dir, this_filename = os.path.split(__file__)
+
+DATA_PATH = os.path.join(this_dir, "useragents.json")
+
 if not os.path.isfile(DB):
-    shutil.copy(os.path.realpath('ByRequests/useragents.json'),DB)
+    shutil.copy(DATA_PATH, DB)
 else:
     if os.stat(DB).st_size==0:
-        shutil.copy(os.path.realpath('ByRequests/useragents.json'),DB)
+        shutil.copy(DATA_PATH,DB)
+
 
 
 ua = UserAgent(cache=True)
