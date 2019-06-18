@@ -17,7 +17,7 @@ setuptools.setup(
         'urllib3>=1.21.1',
         'fake-useragent==0.1.11',
         'lxml==4.2.5',
-        'eventlet==0.23.0'
+        'eventlet==0.25.0'
     ],
     include_package_data=True,
     classifiers=(
