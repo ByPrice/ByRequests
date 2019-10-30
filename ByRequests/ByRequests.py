@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+from ByRequests.agent_manager import AgentManager
 import ast
 import logging
 import random
@@ -14,30 +14,7 @@ import sys
 from os.path import pardir, sep
 import shutil
 
-sys.path.append(pardir + sep + ".")
-
-
-DB = os.path.join(
-    tempfile.gettempdir(),
-    'fake_useragent_0.1.11.json'
-    )
-
-
-this_dir, this_filename = os.path.split(__file__)
-
-DATA_PATH = os.path.join(this_dir, "useragents.json")
-
-if not os.path.isfile(DB):
-    shutil.copy(DATA_PATH, DB)
-else:
-    if os.stat(DB).st_size==0:
-        shutil.copy(DATA_PATH,DB)
-
-
-
-ua = UserAgent(cache=True)
-
-
+ua = AgentManager()
 
 class ByRequest():
     stats_class = {}
@@ -126,7 +103,7 @@ class ByRequest():
         if fake_ua:
             self.logger.debug("Assigning fake User-Agent...")
             try:
-                user_agent = ua.random
+                user_agent = ua.random()
                 self.headers['User-Agent'] = user_agent
             except Exception as e:
                 self.logger.warning("The fake user agent cannot be added to headers")
@@ -373,7 +350,7 @@ class ByRequest():
                         proxies_["https"] = proxy.get("https")
 
                     if fake_ua:
-                        headers_["User-Agent"] = ua.random
+                        headers_["User-Agent"] = ua.random()
 
                     self.logger.debug(
                         "Headers: " + str(headers_) + "      Proxies: " + str(proxies_) + "     Cookies:" + str(
