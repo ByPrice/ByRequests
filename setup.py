@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name='ByRequests',
     packages=['ByRequests'],  # this must be the same as the name above
-    version='1.2.1',
+    version='1.2.2',
     description='Helper to use proxy services with Requests',
     author='Kevin B. Garcia Alonso',
     author_email='kevangy@hotmail.com',

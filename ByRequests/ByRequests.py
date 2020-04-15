@@ -290,7 +290,7 @@ class ByRequest():
 
     def request_wrapper(self, real_timeout, *args, **kwargs):
         if real_timeout:
-            eventlet.monkey_patch()
+            eventlet.monkey_patch(select=False)
             with Timeout(real_timeout, False):
                 try:
                     response = requests.request(*args, **kwargs)
