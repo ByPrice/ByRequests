@@ -31,7 +31,7 @@ else:
 
 class AgentManager():
 
-    manager_dft = 'shadow'
+    manager_dft = 'fake'
     manager_d = {
         'fake'   : UserAgent(cache=True),
         'shadow' : ShadowUserAgent()
